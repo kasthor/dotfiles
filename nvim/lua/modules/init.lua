@@ -81,26 +81,7 @@ return packer.startup(function(use)
     -- Vim Wiki
     use({
         'vimwiki/vimwiki',
-        config = function()
-            vim.g.vimwiki_global_ext = 0
-            vim.g.vimwiki_folding = 'list'
-            vim.g.vimwiki_key_mappings = { all_maps = 0 }
-            vim.g.vimwiki_list = {
-                {
-                    auto_export = 1,
-                    path = '~/.dotfiles/vimwiki/',
-                    syntax = 'markdown',
-                    ext = '.md',
-                },
-            }
-            vim.api.nvim_command([[
-                autocmd FileType vimwiki setlocal nobuflisted
-                autocmd FileType vimwiki map <buffer> <C-]> <Plug>VimwikiFollowLink
-                autocmd FileType vimwiki map <buffer> <C-[> <Plug>VimwikiGoBackLink
-                autocmd FileType vimwiki map <buffer> <C-Space> <Plug>VimwikiToggleListItem
-                nnoremap <Leader>ww :VimwikiIndex<CR>
-            ]])
-        end,
+        config = require('modules.config.vimwiki'),
     })
 
     -- File tree
