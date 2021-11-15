@@ -91,7 +91,12 @@ map('n', '<leader>ol', '<cmd>lua require"telescope.builtin".oldfiles()<CR>')
 map(
     'n',
     '<leader>oc',
-    '<cmd>lua require"telescope.builtin".git_files({cwd = "$HOME/.dotfiles" })<CR>'
+    '<cmd>lua require"telescope.builtin".git_files({cwd = "$HOME/.dotfiles/nvim/" })<CR>'
+)
+map(
+    'n',
+    '<leader>ow',
+    '<cmd>lua require"telescope.builtin".git_files({cwd = "$HOME/.dotfiles/vimwiki/" })<CR>'
 )
 
 -- Telescope Buffer
