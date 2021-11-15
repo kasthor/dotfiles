@@ -1,26 +1,14 @@
 return function()
     local g = vim.g
 
-    g.material_style = 'palenight'
-
-    g.material_italic_strings = false
-    g.material_italic_comments = true
-    g.material_italic_keywords = false
-    g.material_italic_variables = false
-    g.material_borders = true
-    g.material_hide_eob = false
-
-    vim.cmd('colorscheme material')
-
     require('material').setup({
-
         contrast = true, -- Enable contrast for sidebars, floating windows and popup menus like Nvim-Tree
         borders = true, -- Enable borders between verticaly split windows
 
         popup_menu = 'dark', -- Popup menu style ( can be: 'dark', 'light', 'colorful' or 'stealth' )
 
         italics = {
-            comments = false, -- Enable italic comments
+            comments = true, -- Enable italic comments
             keywords = false, -- Enable italic keywords
             functions = false, -- Enable italic functions
             strings = false, -- Enable italic strings
@@ -44,8 +32,6 @@ return function()
             eob_lines = false, -- Hide the end-of-buffer lines
         },
 
-        custom_highlights = {
-
-        }, -- Overwrite highlights with your own
+        custom_highlights = {}, -- Overwrite highlights with your own
     })
 end

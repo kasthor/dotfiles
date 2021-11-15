@@ -13,23 +13,23 @@ return function()
     vim.g.dashboard_default_executive = 'telescope'
     vim.g.dashboard_custom_section = {
         _01_find_files = {
-            description = { '  Git files                           SPC f p ' },
+            description = { '  Git files                           \\oo' },
             command = 'silent! lua require"telescope.builtin".git_files()',
         },
         _02_find_history = {
-            description = { '  Recently opened files               SPC f r' },
+            description = { '  Recently opened files               \\ol' },
             command = 'lua require"telescope.builtin".oldfiles()',
         },
         _03_find_word = {
-            description = { '  Find  word                          SPC f w' },
+            description = { '  Find  word                          \\og' },
             command = 'lua require"telescope.builtin".live_grep()',
         },
         _04_find_dotfiles = {
-            description = { '  Open Personal dotfiles              SPC f d' },
+            description = { '  Open Personal dotfiles              \\oc' },
             command = 'lua require"telescope.builtin".git_files({cwd = "$HOME/.dotfiles" })',
         },
         _05_vimwiki = {
-            description = { '  Wiki                                \\ ww   ' },
+            description = { '  Wiki                                \\ww', },
             command = ':VimwikiIndex',
         },
     }

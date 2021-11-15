@@ -12,7 +12,7 @@ end
 local packer = require('packer')
 
 return packer.startup(function(use)
-    -- packer.init({ compile_path = utils.os.config .. '/lua/packer_compiled.lua', profile = { enable = true }, })
+    packer.init({ profile = { enable = true } })
 
     -- Plugin manager
     use({ 'wbthomason/packer.nvim' })
@@ -21,7 +21,6 @@ return packer.startup(function(use)
         'nvim-lua/plenary.nvim',
         module = 'plenary',
     })
-
     use({
         'nvim-lua/popup.nvim',
         module = 'popup',
@@ -63,19 +62,9 @@ return packer.startup(function(use)
         cmd = 'Dashboard',
     })
 
-    -- Colorschemes
-    -- use({
-    -- 'npxbr/gruvbox.nvim',
-    -- event = 'ColorSchemePre',
-    -- requires = { { 'rktjmp/lush.nvim', module = 'lush' } },
-    -- })
-
-    -- use({ 'folke/tokyonight.nvim', event = 'ColorSchemePre' })
-    -- use({ 'wadackel/vim-dogrun' })
-    --
-    use({
-        'mattn/emmet-vim',
-    })
+    -----[[------------]]-----
+    --- Color Schemes ---
+    -----]]------------[[-----
 
     use({
         'marko-cerovac/material.nvim',
@@ -104,21 +93,13 @@ return packer.startup(function(use)
                     ext = '.md',
                 },
             }
-            vim.api.nvim_command(
-                'autocmd FileType vimwiki setlocal nobuflisted'
-            )
-            vim.api.nvim_command(
-                'autocmd FileType vimwiki map <buffer> <C-]> <Plug>VimwikiFollowLink'
-            )
-            vim.api.nvim_command(
-                'autocmd FileType vimwiki map <buffer> <C-[> <Plug>VimwikiGoBackLink'
-            )
-            vim.api.nvim_command(
-                'autocmd FileType vimwiki map <buffer> <C-Space> <Plug>VimwikiToggleListItem'
-            )
-            vim.api.nvim_command(
-                'nnoremap <Leader>ww :VimwikiIndex<CR>'
-            )
+            vim.api.nvim_command([[
+                autocmd FileType vimwiki setlocal nobuflisted
+                autocmd FileType vimwiki map <buffer> <C-]> <Plug>VimwikiFollowLink
+                autocmd FileType vimwiki map <buffer> <C-[> <Plug>VimwikiGoBackLink
+                autocmd FileType vimwiki map <buffer> <C-Space> <Plug>VimwikiToggleListItem
+                nnoremap <Leader>ww :VimwikiIndex<CR>
+            ]])
         end,
     })
 
@@ -129,25 +110,23 @@ return packer.startup(function(use)
         -- cmd = { 'NvimTreeClipboard', 'NvimTreeClose', 'NvimTreeFindFile', 'NvimTreeOpen', 'NvimTreeRefresh', 'NvimTreeToggle', },
     })
 
-    -- use({
-    --     'windwp/windline.nvim',
-    --     config = require('modules.config.windline'),
-    -- })
-    --
+    -- Fuzzy finding / Ctrl + p
+    use({
+        'nvim-telescope/telescope.nvim',
+        config = require('modules.config.telescope'),
+        module = 'telescope',
+        requires = {
+            { 'nvim-telescope/telescope-fzy-native.nvim' },
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+        },
+    })
+
     use({
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons' },
         config = require('modules.config.lualine'),
     })
 
-    -- Statusline
-    -- use({
-    -- 'glepnir/galaxyline.nvim',
-    -- config = require('modules.config.galaxyline'),
-    -- event = 'ColorScheme',
-    -- })
-
-    -- Tabline
     use({
         'akinsho/nvim-bufferline.lua',
         config = require('modules.config.nvim-bufferline'),
@@ -168,20 +147,13 @@ return packer.startup(function(use)
     -----[[--------------]]-----
     --- IDE features ---
     -----]]--------------[[-----
-    --
-    -- Autopairs
-    --[[--------------
-  use({
-      'windwp/nvim-autopairs',
-      config = require('modules.config.nvim-autopairs'),
-      -- Should be loaded after nvim-compe, otherwise it is gonna complain
-      -- about: "nvim-autopairs.completion.compe"
-      after = 'nvim-compe',
-  })
-  --]]
-    --------------
+
+    use({
+        'mattn/emmet-vim',
+    })
 
     -- Commenting
+    --
     use({ 'tpope/vim-commentary', event = 'BufEnter' })
 
     -- Should be in vim core
@@ -190,15 +162,9 @@ return packer.startup(function(use)
         event = 'BufEnter',
     })
 
-    -- Fuzzy finding / Ctrl + p
+    -- <C-n> To create multiple cursors
     use({
-        'nvim-telescope/telescope.nvim',
-        config = require('modules.config.telescope'),
-        module = 'telescope',
-        requires = {
-            { 'nvim-telescope/telescope-fzy-native.nvim' },
-            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-        },
+        'terryma/vim-multiple-cursors',
     })
 
     -----[[-------------]]-----
@@ -239,11 +205,6 @@ return packer.startup(function(use)
     })
 
     -- Completion plugin
-    -- use({
-    -- 'hrsh7th/nvim-compe',
-    -- config = require('modules.config.nvim-compe'),
-    -- event = 'InsertEnter',
-    -- })
 
     use({
         'hrsh7th/nvim-cmp',
@@ -256,13 +217,12 @@ return packer.startup(function(use)
         },
     })
 
-    
     -- Snippets
 
-    use({ 'L3MON4D3/LuaSnip',
-      config = require('modules.config.luasnip')
+    use({
+        'L3MON4D3/LuaSnip',
+        config = require('modules.config.luasnip'),
     })
-
 
     use({
         'saadparwaiz1/cmp_luasnip',
@@ -282,13 +242,13 @@ return packer.startup(function(use)
         event = 'ColorScheme',
     })
 
+    -----[[-------------]]-----
+    --- Terminal ---
+    -----]]-------------[[-----
+
     use({
         'akinsho/toggleterm.nvim',
         config = require('modules.config.toggleterm'),
-    })
-
-    use({
-        'terryma/vim-multiple-cursors',
     })
 
     packer.install()

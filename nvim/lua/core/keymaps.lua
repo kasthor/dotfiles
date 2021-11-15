@@ -69,25 +69,40 @@ map('c', '<C-d>', '<Del>', { silent = false })
 map('c', '<C-f>', '<C-R>=expand("%:p")<CR>', { silent = false })
 
 -- Git
-map('n', '<space>gs', '<cmd>Neogit<CR>')
+map('n', '<Leader>gs', '<cmd>Neogit<CR>')
+
 -- Telescope
 if utils.os.is_git_dir == 0 then
-    map('n', '<leader>o', '<cmd>lua require"telescope.builtin".git_files()<CR>')
+    map(
+        'n',
+        '<leader>oo',
+        '<cmd>lua require"telescope.builtin".git_files()<CR>'
+    )
 else
-    map('n', '<leader>o', '<cmd>lua require"telescope.builtin".find_files()<CR>')
+    map(
+        'n',
+        '<leader>oo',
+        '<cmd>lua require"telescope.builtin".find_files()<CR>'
+    )
 end
-map('n', '<leader>g', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
-map('n', '<leader>bl', '<cmd>Telescope buffers theme=get_dropdown<CR>')
-map('n', '<leader>?', '<cmd>lua require"telescope.builtin".help_tags()<CR>')
-map('n', '<leader>fb', '<cmd>Telescope buffers theme=get_dropdown<CR>')
-map('n', '<leader>fo', '<cmd>lua require"telescope.builtin".oldfiles()<CR>')
+-- Telescope Open
+map('n', '<leader>og', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
+map('n', '<leader>ol', '<cmd>lua require"telescope.builtin".oldfiles()<CR>')
 map(
     'n',
-    '<space>fd',
+    '<leader>oc',
     '<cmd>lua require"telescope.builtin".git_files({cwd = "$HOME/.dotfiles" })<CR>'
 )
+
+-- Telescope Buffer
+map('n', '<leader>bl', '<cmd>Telescope buffers theme=get_dropdown<CR>')
+
+-- Telescope Help
+map('n', '<leader>?', '<cmd>lua require"telescope.builtin".help_tags()<CR>')
 -- Tree
 map('n', '<leader>e', '<cmd>NvimTreeToggle<CR>')
+
+
 -- Vim surround ( noremap need to be false to work)
 map('n', 'ds', '<Plug>Dsurround', { noremap = false })
 map('n', 'cs', '<Plug>Csurround', { noremap = false })
