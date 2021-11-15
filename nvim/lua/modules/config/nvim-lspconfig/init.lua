@@ -72,7 +72,9 @@ return function()
         local installed = lspinstall.installed_servers()
         for _, server in pairs(installed) do
             local config = servers[server]
-                or { root_dir = lspconfig.util.root_pattern({ '.git/', '.' }) }
+                or {
+                    root_dir = lspconfig.util.root_pattern({ '.git/', '.' }),
+                }
             config.capabilities = capabilities
             config.on_attach = on_attach
             lspconfig[server].setup(config)

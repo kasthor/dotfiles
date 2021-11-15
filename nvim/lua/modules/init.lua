@@ -192,7 +192,6 @@ return packer.startup(function(use)
     use({
         'neovim/nvim-lspconfig',
         config = require('modules.config.nvim-lspconfig'),
-        event = 'ColorScheme',
         requires = {
             { 'kabouzeid/nvim-lspinstall', module = 'lspinstall' },
             { 'glepnir/lspsaga.nvim' },
